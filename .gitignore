@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# 🔒 Archivos locales de editor
+.vscode/
+.idea/
+
+# 🔒 Archivos del sistema operativo
+Thumbs.db
+Desktop.ini
+
+# 🔒 Logs extra
+*.log
+
+# 🔒 Archivos temporales
+.tmp/
+.temp/
