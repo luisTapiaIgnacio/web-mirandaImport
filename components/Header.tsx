@@ -36,123 +36,124 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header
-      className={`
-        sticky top-0 z-50
-        transition-all duration-300
-        ${
-          scrolled
-            ? "bg-black/80 backdrop-blur-md shadow-[0_8px_24px_-8px_rgba(0,0,0,0.5)]"
-            : "bg-black"
-        }
-      `}
-    >
+   <header
+  className={`
+    sticky top-0 z-50
+    transition-all duration-300
+    ${
+      scrolled
+        ? "bg-primary/80 backdrop-blur-md shadow-[0_8px_24px_-8px_rgba(0,0,0,0.5)]"
+        : "bg-primary"
+    }
+  `}
+>
       {/* --- Desktop --- */}
-      <div className="hidden min-h-[100px] items-center md:flex">
-        <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-6 px-5">
-          {/* Logo */}
-          <Link href="/" className="block shrink-0">
-            <Image
-              src="/images/nova-btl/Nova-BTL-y-Eventos-LOGO.png"
-              alt="Nova BTL y eventos"
-              width={220}
-              height={60}
-              className="max-h-[55px] w-auto"
-              priority
-            />
-          </Link>
+     <div className="hidden min-h-[100px] items-center md:flex">
+  <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between gap-6 px-5">
+    {/* Logo */}
+    <Link href="/" className="block shrink-0">
+      <Image
+        src="/images/nova-btl/logo-mirada.png"
+        alt="Miranda Import"
+        width={220}
+        height={60}
+        className="max-h-[90px] w-auto"
+        priority
+      />
+    </Link>
 
-          {/* Menú central con separadores */}
-          <nav aria-label="Menú principal" className="flex-1">
-            <ul className="flex list-none items-center justify-center gap-0 p-0">
-              {NAV_LINKS.map((link, i) => {
-                const isActive = pathname === link.href;
-                return (
-                  <li key={link.href} className="flex items-center">
-                    <Link
-                      href={link.href}
-                      className={`
-                        group relative px-4 py-2.5
-                        rounded-full
-                        font-poppins text-[15px] font-medium capitalize
-                        transition-all duration-300
-                        ${
-                          isActive
-                            ? "text-white"
-                            : "text-white/70 hover:bg-white/[0.08] hover:text-white"
-                        }
-                      `}
-                    >
-                      {link.label}
+    {/* Menú central con separadores */}
+    <nav aria-label="Menú principal" className="flex-1">
+      <ul className="flex list-none items-center justify-center gap-0 p-0">
+        {NAV_LINKS.map((link, i) => {
+          const isActive = pathname === link.href;
+          return (
+            <li key={link.href} className="flex items-center">
+              <Link
+                href={link.href}
+                className={`
+                  group relative px-4 py-2.5
+                  rounded-full
+                  font-poppins text-[15px] font-medium capitalize
+                  transition-all duration-300
+                  ${
+                    isActive
+                      ? "text-white"
+                      : "text-white/70 hover:bg-white/[0.08] hover:text-white"
+                  }
+                `}
+              >
+                {link.label}
 
-                      {/* Línea inferior */}
-                      <span
-                        className={`
-                          absolute bottom-1 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-pink
-                          transition-all duration-300
-                          ${
-                            isActive
-                              ? "w-6 opacity-100"
-                              : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-100"
-                          }
-                        `}
-                      />
-                    </Link>
+                {/* Línea inferior */}
+                <span
+                  className={`
+                    absolute bottom-1 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-pink
+                    transition-all duration-300
+                    ${
+                      isActive
+                        ? "w-6 opacity-100"
+                        : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-100"
+                    }
+                  `}
+                />
+              </Link>
 
-                    {/* Separador vertical */}
-                    {i < NAV_LINKS.length - 1 && (
-                      <span className="h-4 w-px bg-white/15" aria-hidden="true" />
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+              {/* Separador vertical */}
+              {i < NAV_LINKS.length - 1 && (
+                <span className="h-4 w-px bg-white/15" aria-hidden="true" />
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
 
-          {/* Botón Suscríbete */}
-          <Link
-            href="/suscribete"
-            className="
-              group shrink-0 inline-flex items-center gap-2
-              rounded-full bg-pink px-6 py-2.5
-              font-poppins text-sm font-semibold text-white
-              shadow-lg shadow-pink/20
-              transition-all duration-300
-              hover:scale-105 hover:bg-pink/90 hover:shadow-pink/40
-              focus:outline-none focus:ring-2 focus:ring-pink/50 focus:ring-offset-2 focus:ring-offset-black
-            "
-          >
-            Suscríbete
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
-            >
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div>
-      </div>
+    {/* Botón Suscríbete */}
+    <Link
+      href="/suscribete"
+      className="
+        group shrink-0 inline-flex items-center gap-2
+        rounded-full px-6 py-2.5
+        bg-gradient-to-r from-gold-light via-gold to-gold-dark
+        font-poppins text-sm font-semibold text-primary
+        shadow-lg shadow-gold/30
+        transition-all duration-300
+        hover:scale-105 hover:shadow-gold/50
+        focus:outline-none focus:ring-2 focus:ring-gold/50 focus:ring-offset-2 focus:ring-offset-primary
+      "
+    >
+      Suscríbete
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+        className="transition-transform duration-300 group-hover:translate-x-0.5"
+      >
+        <path
+          d="M5 12h14M13 6l6 6-6 6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </Link>
+  </div>
+</div>
 
       {/* --- Mobile --- */}
       <div className="flex min-h-[70px] items-center md:hidden">
         <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-5">
           <Link href="/">
             <Image
-              src="/images/nova-btl/Nova-BTL-y-Eventos-LOGO.png"
+              src="/images/nova-btl/logo-mirada.png"
               alt="Nova BTL y eventos"
               width={160}
               height={44}
-              className="w-auto max-h-10"
+              className="w-auto max-h-20"
             />
           </Link>
           <button
@@ -220,30 +221,39 @@ export default function Header() {
             );
           })}
 
-          <li className="mt-6">
-            <Link
-              href="/suscribete"
-              onClick={() => setOpen(false)}
-              className="
-                flex items-center justify-center gap-2
-                rounded-2xl bg-pink px-5 py-[18px]
-                font-poppins text-sm font-semibold text-white
-                transition-all duration-300
-                hover:scale-[1.02] hover:bg-pink/90
-              "
-            >
-              Suscríbete
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M5 12h14M13 6l6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
-          </li>
+         <li className="mt-6">
+  <Link
+    href="/suscribete"
+    onClick={() => setOpen(false)}
+    className="
+      group flex items-center justify-center gap-2
+      rounded-2xl px-5 py-[18px]
+      bg-gradient-to-r from-gold-light via-gold to-gold-dark
+      font-poppins text-sm font-semibold text-primary
+      shadow-lg shadow-gold/30
+      transition-all duration-300
+      hover:scale-[1.02] hover:shadow-gold/50
+    "
+  >
+    Suscríbete
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="transition-transform duration-300 group-hover:translate-x-0.5"
+    >
+      <path
+        d="M5 12h14M13 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </Link>
+</li>
         </ul>
       </div>
 

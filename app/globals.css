@@ -3,9 +3,9 @@
 @import "tailwindcss";
 
 @theme {
-  /* 🎨 Colores */
-  --color-primary: #2872fa;
-  --color-primary-dark: #1559ed;
+  /*  Colores */
+  --color-primary: #081047;
+  --color-primary-dark: #09217d;
   --color-text: #3a4f66;
   --color-heading: #192a3d;
   --color-pink: #c04493;
@@ -14,6 +14,14 @@
   --color-teal: #1fb6ac;
   --color-bg-light: #f2f5f7;
   --color-bg-lighter: #fafbfc;
+
+    /*  Dorados */
+  --color-gold-light: #ffe9a8;
+  --color-gold: #f5c542;
+  --color-gold-alt: #e8a92b;
+  --color-gold-dark: #c47f0a;
+  --color-amber: #ffb347;
+
 
   /* 🔤 Fuentes */
   --font-krona: "Krona One", sans-serif;
