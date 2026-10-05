@@ -27,21 +27,25 @@ export default function Hero() {
           {/* H1 con sombra */}
           <h1 className="
             mb-4 text-[clamp(28px,4vw,40px)] leading-[1.4] font-bold uppercase
-            text-pink!
+            text-light
             [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]
           ">
-            &ldquo;Diseñamos <span className="text-cyan-alt">experiencias</span> corporativas
-            <br /> que <span className="text-cyan">fortalecen</span> marcas
-            <br /> y movilizan equipos&rdquo;
+            &ldquo;TU EVENTO, TU ESTILO, <br/>  <span className="text-white">TUS RECUERDOS INOLVIDABLES</span>
+          
           </h1>
 
           {/* Párrafo con sombra sutil */}
           <p className="
-            mx-auto mb-7 max-w-[620px] text-base text-white/80 md:text-lg
-            [text-shadow:0_1px_6px_rgba(0,0,0,0.55)]
-          ">
-            Te ayudamos a convertir objetivos de negocio en experiencias que conectan.
-          </p>
+  mx-auto mb-7 max-w-[620px] text-base text-white/80 md:text-lg
+  [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]
+">
+  Transformamos cada celebración en una experiencia interactiva, divertida y llena de momentos especiales. Con nuestro{" "}
+  <span className="text-white font-black uppercase
+    [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]">
+    espejo fotográfico
+  </span>
+  , tus invitados serán protagonistas de recuerdos que podrán conservar para siempre
+</p>
 
           {/* Botón */}
           <a
@@ -50,8 +54,8 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="
               group inline-flex items-center gap-3
-              rounded-full bg-pink px-6 py-3
-              font-poppins text-base font-semibold text-white
+              rounded-full bg-gradient-gold px-6 py-3
+              font-poppins text-base font-bold text-primary
               shadow-lg
               transition-all duration-300
               hover:scale-105 hover:bg-pink/90 hover:shadow-xl

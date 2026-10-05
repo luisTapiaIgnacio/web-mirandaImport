@@ -4,8 +4,9 @@
 
 @theme {
   /*  Colores */
-  --color-primary: #081047;
+  --color-primary: #02152b;
   --color-primary-dark: #09217d;
+  --color-primary-light:#0054ef;
   --color-text: #3a4f66;
   --color-heading: #192a3d;
   --color-pink: #c04493;
@@ -15,12 +16,18 @@
   --color-bg-light: #f2f5f7;
   --color-bg-lighter: #fafbfc;
 
-    /*  Dorados */
+     /* tus colores dorados */
   --color-gold-light: #ffe9a8;
   --color-gold: #f5c542;
-  --color-gold-alt: #e8a92b;
   --color-gold-dark: #c47f0a;
-  --color-amber: #ffb347;
+
+  /* 👇 degradado dorado reutilizable (horizontal) */
+  --background-image-gradient-gold: linear-gradient(
+    90deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold) 50%,
+    var(--color-gold-dark) 100%
+  );
 
 
   /* 🔤 Fuentes */
@@ -29,16 +36,18 @@
 }
 
 /* 🧱 Estilos base */
-body {
+html, body {
   color: var(--color-text);
   background: var(--color-bg-lighter);
   font-family: var(--font-poppins), sans-serif;
   line-height: 1.65;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 h1,
 h2 {
-  color: var(--color-heading);
+  color: var(--color-primary-light);
   font-family: var(--font-krona), sans-serif;
 }
 
