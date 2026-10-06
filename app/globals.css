@@ -36,12 +36,16 @@
 }
 
 /* 🧱 Estilos base */
-html, body {
+html{
+ overflow-x: hidden;
+}
+
+body {
   color: var(--color-text);
   background: var(--color-bg-lighter);
   font-family: var(--font-poppins), sans-serif;
   line-height: 1.65;
-  overflow-x: hidden;
+ overflow-x: clip;   /* 👈 "clip" NO rompe sticky, "hidden" sí puede */
   max-width: 100%;
 }
 
@@ -74,12 +78,13 @@ h3 {
   }
 }
 
+/* ✏️ CAMBIO 1: translate3d en lugar de translateX (evita parpadeos en la unión) */
 @keyframes scroll-left {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -91,8 +96,17 @@ h3 {
   animation: hero-reveal 1s ease-out both;
 }
 
+/* ✏️ CAMBIO 2: la duración real la pone el componente Marquee (prop speed) */
 .animate-marquee {
-  animation: scroll-left 15s linear infinite;
+  animation: scroll-left 30s linear infinite;
+  will-change: transform;
+}
+
+/* ✏️ CAMBIO 3 (nuevo): respeta a quienes desactivan las animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 /* 📎 Mega menú "Complementa tu Evento" en escritorio (ver Header.tsx) */
@@ -104,4 +118,15 @@ h3 {
   font-size: 27px;
   font-weight: 300;
   line-height: 1;
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

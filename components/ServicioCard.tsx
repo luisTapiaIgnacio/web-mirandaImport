@@ -40,8 +40,11 @@ export default function ServicioCard({
         "
       />
 
-      {/* 🟥 Barra rosa superior */}
-      <div className="relative z-10 bg-pink py-2 text-center">
+      {/* 🟦 Barra superior con degradado primary */}
+      <div className="
+        relative z-10 py-2 text-center
+        bg-gradient-to-r from-primary to-primary-dark
+      ">
         <span className="font-krona text-[16px] font-bold uppercase tracking-[0.15em] text-white">
           {eyebrow}
         </span>
@@ -49,7 +52,6 @@ export default function ServicioCard({
 
       {/* 📝 Contenido */}
       <div className="relative z-10 flex flex-1 flex-col items-center p-8 text-center">
-        {/* 🎯 Título — cambia a blanco en hover */}
         <h3
           className="
             flex w-full min-h-[64px] items-center justify-center
@@ -61,16 +63,14 @@ export default function ServicioCard({
           {titulo}
         </h3>
 
-        {/* 🎯 Línea — cambia a blanco en hover */}
         <hr
           className="
-            my-5 w-full border-t-2 border-pink/30
+            my-5 w-full border-t-2 border-primary/30
             transition-colors duration-500
             group-hover:border-white
           "
         />
 
-        {/* 🎯 Párrafo — cambia a blanco en hover */}
         <p
           className="
             mb-6 flex-1 w-full
@@ -88,11 +88,12 @@ export default function ServicioCard({
           rel="noopener noreferrer"
           className="
             mt-auto inline-flex items-center justify-center gap-2
-            rounded-full bg-pink px-8 py-3
+            rounded-full px-8 py-3
+            bg-gradient-to-r from-primary to-primary-dark
             text-sm font-semibold tracking-wide text-white
             transition-all duration-300
             hover:scale-105 hover:brightness-110
-            focus:outline-none focus:ring-2 focus:ring-pink/50 focus:ring-offset-2
+            focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2
           "
         >
           Cotiza tu evento

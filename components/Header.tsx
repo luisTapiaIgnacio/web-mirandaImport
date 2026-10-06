@@ -38,13 +38,13 @@ export default function Header() {
   return (
     <header
       className={`
-        sticky top-0 z-50
-        transition-all duration-300
-        ${
-          scrolled
-            ? "bg-primary/80 backdrop-blur-md shadow-[0_8px_24px_-8px_rgba(0,0,0,0.5)]"
-            : "bg-primary"
-        }
+       sticky top-0 z-50
+    transition-all duration-300 ease-out
+    ${
+      scrolled
+        ? "bg-primary/30 backdrop-blur-xl shadow-[0_8px_24px_-8px_rgba(0,0,0,0.8)] border-b border-white/10"
+        : "bg-primary border-b border-transparent"
+    }
       `}
     >
       {/* --- Desktop --- */}
@@ -161,28 +161,60 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            aria-label="Abrir menú"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen((v) => !v)}
             className="relative z-[1000] cursor-pointer border-none bg-transparent text-white"
           >
-            <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true">
-              <rect y="0" width="18" height="1.7" rx="1" fill="currentColor" />
-              <rect
-                y="6.15"
+            {open ? (
+              /* ❌ Ícono X */
+              <svg
                 width="18"
-                height="1.7"
-                rx="1"
-                fill="currentColor"
-              />
-              <rect
-                y="12.3"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+                className="transition-transform duration-300"
+              >
+                <path
+                  d="M6 6l12 12M18 6L6 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              /* ☰ Ícono hamburguesa */
+              <svg
                 width="18"
-                height="1.7"
-                rx="1"
-                fill="currentColor"
-              />
-            </svg>
+                height="14"
+                viewBox="0 0 18 14"
+                aria-hidden="true"
+                className="transition-transform duration-300"
+              >
+                <rect
+                  y="0"
+                  width="18"
+                  height="1.7"
+                  rx="1"
+                  fill="currentColor"
+                />
+                <rect
+                  y="6.15"
+                  width="18"
+                  height="1.7"
+                  rx="1"
+                  fill="currentColor"
+                />
+                <rect
+                  y="12.3"
+                  width="18"
+                  height="1.7"
+                  rx="1"
+                  fill="currentColor"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </div>
