@@ -19,7 +19,7 @@ const SERVICIOS: Servicio[] = [
       "Diseñamos y producimos eventos que fortalecen tu marca y generan experiencias memorables.",
     whatsapp:
       "https://wa.me/51989661090?text=Hola,%20quiero%20cotizar%20un%20evento%20corporativo%20con%20Nova%20BTL%20y%20Eventos",
-    imagen: "/images/nova-btl/serv1.png",
+    imagen: "/images/nova-btl/event.jpg",
   },
   {
     eyebrow: "SNACKS",
@@ -28,120 +28,309 @@ const SERVICIOS: Servicio[] = [
       "Carritos de snacks premium que complementan reuniones, celebraciones y experiencias memorables.",
     whatsapp:
       "https://wa.me/51989661090?text=Hola,%20estoy%20interesado%20en%20una%20Estacion%20de%20Snack%20Premium",
-    imagen: "/images/nova-btl/serv4.png",
+    imagen: "/images/nova-btl/estacion-snk.jpg",
   },
   {
     eyebrow: "TEAM",
-    titulo: "Team Building",
+    titulo: "Alquiler de espejo fotografico",
     descripcion:
-      "Desarrollamos experiencias que fortalecen equipos y cultura organizacional.",
+      "Una experiencia interactiva de fotografía que combina tecnología, diversión y elegancia. Asistentencia, instalacion y desmontaje. ",
     whatsapp:
       "https://wa.me/51989661090?text=Hola,%20quiero%20cotizar%20una%20actividad%20de%20team%20building",
-    imagen: "/images/nova-btl/serv3.png",
+    imagen: "/images/nova-btl/espejo-ft.jpg",
   },
   {
     eyebrow: "MERCH & BRAND",
     titulo: "Merchandising & Branding",
     descripcion:
-      "Gestionamos productos y materiales que refuerzan tu identidad de marca.",
+      "Gestionamos productos y materiales que consolidan tu identidad de marca y potencian su reconocimiento.",
     whatsapp:
       "https://wa.me/51989661090?text=Hola,%20estoy%20interesado%20en%20merchandising%20y%20branding",
-    imagen: "/images/nova-btl/serv4.png",
+    imagen: "/images/nova-btl/mercha.jpg",
   },
   {
     eyebrow: "FOTO",
     titulo: "Espejo fotográfico",
-    descripcion:
-      "Recuerdos instantáneos y personalizados para tus invitados.",
+    descripcion: "Recuerdos instantáneos y personalizados para tus invitados.",
     whatsapp:
       "https://wa.me/51989661090?text=Hola,%20quiero%20cotizar%20un%20espejo%20fotografico",
     imagen: "/images/nova-btl/serv3.png",
   },
 ];
 
+const AUTOPLAY_MS = 3500;
+
 export default function ServiciosGrid() {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Controla si el autoplay está pausado
+  const pausedRef = useRef(false);
+
   const [current, setCurrent] = useState(0);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
 
-  // ✅ Scroll correcto: centra la card sin pelear con el snap
-  const scrollToIndex = useCallback((i: number) => {
+  /*
+   * Obtiene el espacio entre una card y la siguiente.
+   *
+   * Ejemplo:
+   *
+   * CARD 1 | gap | CARD 2
+   *
+   * offsetLeft CARD 2 - offsetLeft CARD 1
+   */
+  const getStep = useCallback(() => {
     const el = scrollRef.current;
-    if (!el) return;
-    const card = el.children[i] as HTMLElement;
-    if (!card) return;
 
-    const targetLeft =
-      card.offsetLeft - el.offsetLeft - (el.clientWidth - card.clientWidth) / 2;
+    if (!el || el.children.length < 2) {
+      return 0;
+    }
 
-    el.scrollTo({ left: targetLeft, behavior: "smooth" });
-    setCurrent(i);
+    const first = el.children[0] as HTMLElement;
+    const second = el.children[1] as HTMLElement;
+
+    return second.offsetLeft - first.offsetLeft;
   }, []);
 
-  const scrollPrev = () => scrollToIndex(Math.max(0, current - 1));
-  const scrollNext = () =>
-    scrollToIndex(Math.min(SERVICIOS.length - 1, current + 1));
+  /*
+   * Mover una card
+   */
+  const scrollByStep = useCallback(
+    (direction: 1 | -1) => {
+      const el = scrollRef.current;
 
-  // ✅ Detectar la card más centrada
+      if (!el) return;
+
+      const step = getStep();
+
+      if (!step) return;
+
+      el.scrollBy({
+        left: direction * step,
+        behavior: "smooth",
+      });
+    },
+    [getStep],
+  );
+
+  /*
+   * Ir a una card específica
+   */
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const el = scrollRef.current;
+
+      if (!el) return;
+
+      const step = getStep();
+
+      if (!step) return;
+
+      el.scrollTo({
+        left: index * step,
+        behavior: "smooth",
+      });
+    },
+    [getStep],
+  );
+
+  /*
+   * Detectar posición actual
+   */
   useEffect(() => {
     const el = scrollRef.current;
+
     if (!el) return;
 
     const onScroll = () => {
-      const containerCenter = el.scrollLeft + el.clientWidth / 2;
-      let closest = 0;
-      let closestDist = Infinity;
+      const step = getStep();
 
-      Array.from(el.children).forEach((child, i) => {
-        const c = child as HTMLElement;
-        const cardCenter = c.offsetLeft - el.offsetLeft + c.clientWidth / 2;
-        const dist = Math.abs(cardCenter - containerCenter);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closest = i;
-        }
-      });
+      if (!step) return;
 
-      setCurrent(closest);
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      /*
+       * ¿Estamos al inicio?
+       */
+      setAtStart(el.scrollLeft <= 2);
+
+      /*
+       * ¿Estamos al final?
+       */
+      setAtEnd(el.scrollLeft >= maxScroll - 2);
+
+      /*
+       * Determinar card actual
+       */
+      const index = Math.round(el.scrollLeft / step);
+
+      setCurrent(Math.min(Math.max(index, 0), SERVICIOS.length - 1));
     };
 
-    el.addEventListener("scroll", onScroll, { passive: true });
+    el.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
+
+    window.addEventListener("resize", onScroll);
+
     onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
+
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [getStep]);
+
+  /*
+   * AUTOPLAY
+   *
+   * 1 → 2 → 3 → 4 → 5 → 1
+   */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const el = scrollRef.current;
+
+      if (!el) return;
+
+      /*
+       * Si el usuario está interactuando,
+       * no mover.
+       */
+      if (pausedRef.current) return;
+
+      const step = getStep();
+
+      if (!step) return;
+
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      /*
+       * Si ya estamos prácticamente al final,
+       * volvemos al inicio.
+       */
+      if (el.scrollLeft >= maxScroll - 5) {
+        el.scrollTo({
+          left: 0,
+          behavior: "smooth",
+        });
+
+        return;
+      }
+
+      /*
+       * Avanzar una card
+       */
+      el.scrollBy({
+        left: step,
+        behavior: "smooth",
+      });
+    }, AUTOPLAY_MS);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [getStep]);
+
+  /*
+   * Pausar cuando el usuario entra
+   */
+  const handleMouseEnter = () => {
+    pausedRef.current = true;
+  };
+
+  /*
+   * Continuar cuando sale
+   */
+  const handleMouseLeave = () => {
+    pausedRef.current = false;
+  };
 
   return (
     <section className="relative w-full overflow-hidden bg-white py-[70px]">
-      {/* 🔷 Patrón de cuadrícula */}
+      {/* =========================================
+          FONDO
+      ========================================= */}
+
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(8,16,71,0.10) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(8,16,71,0.10) 1px, transparent 1px),
-            linear-gradient(to right, rgba(8,16,71,0.25) 2px, transparent 2px),
-            linear-gradient(to bottom, rgba(8,16,71,0.25) 2px, transparent 2px)
+            linear-gradient(
+              to right,
+              rgba(8,16,71,0.10) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(8,16,71,0.10) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              to right,
+              rgba(8,16,71,0.25) 2px,
+              transparent 2px
+            ),
+            linear-gradient(
+              to bottom,
+              rgba(8,16,71,0.25) 2px,
+              transparent 2px
+            )
           `,
           backgroundSize: "40px 40px, 40px 40px, 200px 200px, 200px 200px",
         }}
       />
 
+      {/* =========================================
+          CONTENEDOR
+      ========================================= */}
+
       <div className="relative mx-auto max-w-[1290px] px-5">
+        {/* TITULO */}
+
         <p className="mb-1 py-3 text-left font-krona text-sm font-bold uppercase text-[#3a3a3a]">
           Soluciones diseñadas para tu negocio
         </p>
+
         <h2 className="font-krona text-4xl uppercase text-[#180d0d] md:text-5xl">
           ¿Cómo te ayudamos?
         </h2>
 
-        {/* Carrusel */}
-        <div className="relative mt-10">
-          {/* Flecha izquierda */}
+        {/* =========================================
+            CARRUSEL
+        ========================================= */}
+
+        <div
+          className="relative mt-10"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* =====================================
+              FLECHA IZQUIERDA
+          ===================================== */}
+
           <button
             type="button"
-            onClick={scrollPrev}
+            onClick={() => scrollByStep(-1)}
             aria-label="Anterior"
-            disabled={current === 0}
-            className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-primary hover:text-white disabled:opacity-30 md:block"
+            disabled={atStart}
+            className="
+              absolute
+              left-0
+              top-1/2
+              z-10
+              hidden
+              -translate-y-1/2
+              rounded-full
+              bg-white
+              p-3
+              shadow-lg
+              transition
+              hover:scale-110
+              hover:bg-primary
+              hover:text-white
+              disabled:opacity-30
+              md:block
+            "
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path
@@ -154,28 +343,73 @@ export default function ServiciosGrid() {
             </svg>
           </button>
 
-          {/* Track */}
+          {/* =====================================
+              TRACK
+          ===================================== */}
+
           <div
             ref={scrollRef}
-            className="scrollbar-hide flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pt-4 pb-14"
+            className="
+              flex
+              gap-8
+              overflow-x-auto
+              py-4
+              pb-14
+
+              snap-x
+              snap-mandatory
+
+              scroll-smooth
+
+              [scrollbar-width:none]
+              [&::-webkit-scrollbar]:hidden
+            "
           >
-            {SERVICIOS.map((s, i) => (
+            {SERVICIOS.map((servicio, index) => (
               <div
-                key={`${s.titulo}-${i}`}
-                className="w-[85%] shrink-0 snap-center sm:w-[45%] lg:w-[calc(25%-1.5rem)]"
+                key={`${servicio.titulo}-${index}`}
+                className="
+                  w-[85%]
+                  shrink-0
+                  snap-start
+
+                  sm:w-[45%]
+
+                  lg:w-[calc(25%-1.5rem)]
+                "
               >
-                <ServicioCard {...s} />
+                <ServicioCard {...servicio} />
               </div>
             ))}
           </div>
 
-          {/* Flecha derecha */}
+          {/* =====================================
+              FLECHA DERECHA
+          ===================================== */}
+
           <button
             type="button"
-            onClick={scrollNext}
+            onClick={() => scrollByStep(1)}
             aria-label="Siguiente"
-            disabled={current === SERVICIOS.length - 1}
-            className="absolute right-0 top-1/2 z-10 hidden -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition hover:bg-primary hover:text-white disabled:opacity-30 md:block"
+            disabled={atEnd}
+            className="
+              absolute
+              right-0
+              top-1/2
+              z-10
+              hidden
+              -translate-y-1/2
+              rounded-full
+              bg-white
+              p-3
+              shadow-lg
+              transition
+              hover:scale-110
+              hover:bg-primary
+              hover:text-white
+              disabled:opacity-30
+              md:block
+            "
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path
@@ -189,35 +423,57 @@ export default function ServiciosGrid() {
           </button>
         </div>
 
-        {/* Dots */}
+        {/* =========================================
+            DOTS
+        ========================================= */}
+
         <div className="mt-6 flex justify-center gap-2">
-          {SERVICIOS.map((_, i) => (
+          {SERVICIOS.map((_, index) => (
             <button
-              key={i}
+              key={index}
               type="button"
-              onClick={() => scrollToIndex(i)}
-              aria-label={`Ir al servicio ${i + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                current === i
-                  ? "w-8 bg-primary"
-                  : "w-2.5 bg-primary/30 hover:bg-primary/60"
-              }`}
+              onClick={() => scrollToIndex(index)}
+              aria-label={`Ir al servicio ${index + 1}`}
+              className={`
+                h-2.5
+                rounded-full
+                transition-all
+                duration-300
+
+                ${
+                  current === index
+                    ? "w-8 bg-primary"
+                    : "w-2.5 bg-primary/30 hover:bg-primary/60"
+                }
+              `}
             />
           ))}
         </div>
 
-        {/* Botón inferior */}
+        {/* =========================================
+            BOTON
+        ========================================= */}
+
         <div className="mt-20 text-center">
           <a
             href="/servicios"
             className="
-              inline-block rounded-full
-              bg-gradient-to-r from-primary to-primary-dark
-              px-10 py-4
-              font-bold text-[20px] text-white
+              inline-block
+              rounded-full
+              bg-gradient-to-r
+              from-primary
+              to-primary-dark
+              px-10
+              py-4
+              text-[20px]
+              font-bold
+              text-white
               shadow-lg
-              transition-all duration-500
-              hover:scale-105 hover:shadow-xl hover:brightness-110
+              transition-all
+              duration-500
+              hover:scale-105
+              hover:shadow-xl
+              hover:brightness-110
             "
           >
             Ver servicios

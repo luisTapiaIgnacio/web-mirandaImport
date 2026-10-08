@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 const PORTAFOLIO = [
-  { img: "/images/nova-btl/background-fiesta-fin-ano.jpg", titulo: "Fiesta fin de año Ferrenergy", desc: "Un cierre de año para conectar y celebrar.", href: "/portafolio/fiesta-fin-de-ano-ferrenergy" },
-  { img: "/images/nova-btl/background-woman-tech.jpg", titulo: "Woman Tech Yape", desc: "Un espacio para visibilizar y potenciar mujeres en tech.", href: "/portafolio/woman-tech-yape" },
-  { img: "/images/nova-btl/background-navidad-ferrenergy.jpg", titulo: "Navidad Ferrenergy", desc: "Celebramos juntos el espíritu de la Navidad.", href: "/portafolio/navidad-ferrenergy" },
-  { img: "/images/nova-btl/background-ferias-yape.jpg", titulo: "Ferias Yape", desc: "Activaciones que impulsan visibilidad y engagement.", href: "/portafolio/ferias-yape" },
+  { img: "/images/nova-btl/celebra/port-1.jpg", titulo: "Fiesta fin de año Ferrenergy", desc: "Un cierre de año para conectar y celebrar.", href: "/portafolio/fiesta-fin-de-ano-ferrenergy" },
+  { img: "/images/nova-btl/celebra/port-2.jpg", titulo: "Woman Tech Yape", desc: "Un espacio para visibilizar y potenciar mujeres en tech.", href: "/portafolio/celebra/port-3.jpg" },
+  { img: "/images/nova-btl/celebra/port-5.jpg", titulo: "Navidad Ferrenergy", desc: "Celebramos juntos el espíritu de la Navidad.", href: "/portafolio/navidad-ferrenergy" },
+  { img: "/images/nova-btl/celebra/port-4.jpg", titulo: "Ferias Yape", desc: "Activaciones que impulsan visibilidad y engagement.", href: "/portafolio/ferias-yape" },
 ];
 
 export default function ExperienciaSection() {
@@ -18,17 +18,23 @@ export default function ExperienciaSection() {
 
       <div className="relative mx-auto max-w-[1290px] px-5">
         {/* Header en dos columnas: título a la izquierda, descripción a la derecha */}
+        
         <div className="flex flex-col gap-8 text-left md:flex-row md:items-start md:justify-between">
-          <h2 className="text-2xl leading-snug font-bold text-white uppercase md:max-w-[280px] md:text-3xl">
-            Nuestra experiencia
-          </h2>
-          <p className="text-sm text-white/70 md:max-w-[560px] md:text-right">
-            NOVA nace con una sólida experiencia en consumo masivo y fintech, liderando
-            iniciativas de eventos, marca y estrategias comerciales. Hemos trabajado en
-            proyectos que combinan creatividad, ejecución y enfoque en resultados,
-            entendiendo las necesidades reales del negocio y de cada cliente.
-          </p>
-        </div>
+  <div>
+   <h2 className="text-3xl leading-tight font-bold tracking-wide text-white uppercase md:text-5xl">
+  Nuestra experiencia
+</h2>
+    <p className="mt-2 text-sm font-semibold tracking-wide text-white/80 uppercase md:text-base">
+      Momentos que merecen ser recordados
+    </p>
+  </div>
+  <p className="text-base leading-relaxed text-white/70 md:max-w-[560px] md:text-right md:text-lg">
+    Cada evento es diferente y cada fotografía cuenta una historia. En nuestra
+    galería podrás descubrir cómo MIRANDA MAGIC MIRROR forma parte de
+    celebraciones especiales, creando espacios de entretenimiento y recuerdos
+    para compartir.
+  </p>
+</div>
 
         {/* Grilla de 2 columnas con tarjetas grandes */}
         <div className="mt-10 grid grid-cols-1 gap-y-8 sm:grid-cols-2 sm:gap-y-[89px] sm:gap-x-[111px]">

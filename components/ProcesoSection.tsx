@@ -6,14 +6,27 @@ const PASOS = [
   { icon: "/images/nova-btl/logo_03.png", texto: "Ejecutamos con precisión" },
   { icon: "/images/nova-btl/logo_04.png", texto: "Medimos impacto" },
 ];
+// Colores alternados: par = azul claro, impar = dorado claro
+const BG_COLORS = [
+  "bg-[#e3ecff] border border-[#0054ef]/15",
+  "bg-[#fff3cf] border border-[#f5c542]/40",
+  "bg-[#e3ecff] border border-[#0054ef]/15",
+  "bg-[#fff3cf] border border-[#f5c542]/40",
+];
 
-// Colores alternados: par = cyan, impar = rosa
-const BG_COLORS = ["bg-[#a1f1f8]", "bg-[#fed9f8]", "bg-[#a1f1f8]", "bg-[#fed9f8]"];
+
 
 export default function ProcesoSection() {
   return (
-    <section className="w-full bg-white py-[80px]">
-      <div className="mx-auto max-w-[1400px] px-5">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#f2f5f7] to-[#fafbfc] py-[80px]">
+  {/* Patrón de puntitos (muy suave) */}
+  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(2,21,43,0.07)_1px,transparent_1px)] bg-[length:24px_24px]" />
+
+  {/* Destellos de color bajos */}
+  <div className="pointer-events-none absolute left-10 top-10 h-72 w-72 rounded-full bg-[#f5c542]/10 blur-3xl" />
+  <div className="pointer-events-none absolute bottom-10 right-10 h-80 w-80 rounded-full bg-[#0054ef]/10 blur-3xl" />
+
+  <div className="relative z-10 mx-auto max-w-[1400px] px-5">
         {/* Título */}
         <h2 className="text-center font-krona text-3xl uppercase leading-tight tracking-wide text-[#192a3d] md:text-4xl">
           ¿Cómo damos vida a tus ideas?
@@ -44,7 +57,7 @@ export default function ProcesoSection() {
               </div>
 
               {/* Número */}
-              <p className="mt-5 font-krona text-3xl text-pink">
+              <p className="mt-5 font-krona text-3xl text-[#0054ef]">
                 {String(i + 1).padStart(2, "0")}
               </p>
 

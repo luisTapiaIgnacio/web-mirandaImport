@@ -2,21 +2,18 @@ import Image from "next/image";
 
 const CARDS = [
   {
-    img: "/images/nova-btl/complementarios.jpg",
+    img: "/images/nova-btl/celebra/bodas.jpg",
     alt: "Estación de snacks premium para eventos corporativos en Lima - Nova BTL y Eventos",
-    titulo: "Estaciones snack premium",
+    titulo: "BODAS",
     items: [
-      "Charcutería gourmet",
-      "Tablas personalizadas",
-      "Productos premium",
-      "Atención durante el evento",
+      "El reflejo de su gran día, en una foto que sus invitados guardarán para siempre",
     ],
     href: "/complementa-tu-evento",
   },
   {
-    img: "/images/nova-btl/complementarios-3.jpg",
+    img: "/images/nova-btl/celebra/quinceaños.jpg",
     alt: "Plataforma 360 para activaciones de marca y eventos corporativos - Nova BTL y Eventos",
-    titulo: "Plataforma 360°",
+    titulo: "QUINCE AÑOS",
     items: [
       "Videos 360 para redes",
       "Personalización con tu marca",
@@ -26,11 +23,11 @@ const CARDS = [
     href: "/complementa-tu-evento",
   },
   {
-    img: "/images/nova-btl/complementarios-2.jpg",
+    img: "/images/nova-btl/celebra/graduacion.jpg",
     alt: "Servicio de fotografía instantánea con impresión para eventos corporativos - Nova BTL y Eventos",
     titulo: "Fotografía instantánea",
     items: [
-      "Impresiones al instante",
+      "GRADUACIONES",
       "Marcos y diseños personalizados",
       "Recuerdo para tus invitados",
       "Fotos ilimitadas",
@@ -40,9 +37,9 @@ const CARDS = [
 
   // 👇 NUEVAS 3 CARDS
   {
-    img: "/images/nova-btl/complementarios-4.jpg",
+    img: "/images/nova-btl/celebra/corp.jpg",
     alt: "Servicio de DJ y sonido profesional para eventos corporativos - Nova BTL y Eventos",
-    titulo: "DJ y sonido profesional",
+    titulo: "EVENTOS CORPORATIVOS",
     items: [
       "Equipo de audio profesional",
       "Playlist personalizada",
@@ -52,9 +49,9 @@ const CARDS = [
     href: "/complementa-tu-evento",
   },
   {
-    img: "/images/nova-btl/complementarios-5.jpg",
+    img: "/images/nova-btl/celebra/cumple.jpg",
     alt: "Cabina de fotos con accesorios para eventos corporativos - Nova BTL y Eventos",
-    titulo: "Cabina de fotos",
+    titulo: "CUMPLEAÑOS",
     items: [
       "Accesorios temáticos",
       "Impresión instantánea",
@@ -64,9 +61,9 @@ const CARDS = [
     href: "/complementa-tu-evento",
   },
   {
-    img: "/images/nova-btl/complementarios-6.jpg",
+    img: "/images/nova-btl/celebra/bautizos.jpg",
     alt: "Servicio de catering gourmet para eventos corporativos en Lima - Nova BTL y Eventos",
-    titulo: "Catering gourmet",
+    titulo: "BAUTIZOS Y CELEBRACIONES",
     items: [
       "Menú personalizado",
       "Presentación premium",
@@ -77,7 +74,7 @@ const CARDS = [
   },
 ];
 
-export default function ComplementaSection() {
+export default function CelebraSection() {
   return (
     <section className="relative w-full overflow-hidden py-[100px]">
       {/* 🎨 Fondo oscuro */}
@@ -127,94 +124,69 @@ export default function ComplementaSection() {
               "
             >
               {/* Imagen con título encima */}
-              <div className="relative h-[340px] w-full overflow-hidden">
-                <Image
-                  src={card.img}
-                  alt={card.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="
-                    object-cover
-                    transition-transform duration-700 ease-out
-                    group-hover:scale-105
-                  "
-                />
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0d1b2a] via-[#0d1b2a]/60 to-transparent" />
+              {/* Imagen */}
+<div className="relative h-[340px] w-full overflow-hidden">
+  <Image
+    src={card.img}
+    alt={card.alt}
+    fill
+    sizes="(max-width: 768px) 100vw, 33vw"
+    className="
+      object-cover
+      transition-transform duration-700 ease-out
+      group-hover:scale-105
+    "
+  />
+  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0d1b2a] via-[#0d1b2a]/60 to-transparent" />
+</div>
 
-                <h3
-                  className="
-                  absolute bottom-4 left-6 right-6
-                  text-[22px] uppercase leading-tight tracking-wide text-white
-                  drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]
-                "
-                >
-                  {card.titulo}
-                </h3>
-              </div>
+{/* Título + frase + link */}
+<div className="flex flex-1 flex-col p-6">
+  <div className="mb-6 flex flex-1 flex-col justify-center">
+    <h3 className="mb-4 text-center text-[28px] uppercase leading-tight tracking-wide text-white">
+      {card.titulo}
+    </h3>
 
-              {/* Lista + link */}
-              <div className="flex flex-1 flex-col p-6">
-                <ul className="mb-6 flex-1 space-y-3">
-                  {card.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span
-                        className="
-                          mt-1 flex h-4 w-4 shrink-0 items-center justify-center
-                          rounded-full border border-pink
-                        "
-                        aria-hidden="true"
-                      >
-                        <svg
-                          width="8"
-                          height="8"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                        >
-                          <path
-                            d="M1 5L4 8L9 2"
-                            stroke="#c04493"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
+    {card.items.map((item) => (
+      <p
+        key={item}
+        className="text-center font-poppins text-[17px] leading-relaxed tracking-wide text-white/85"
+      >
+        {item}
+      </p>
+    ))}
+  </div>
 
-                      <span className="font-poppins text-[15px] leading-snug tracking-wide text-white/85">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+  <a
+    href={card.href}
+    className="
+      inline-flex items-center gap-2 self-center
+      rounded-full border border-transparent px-6 py-2
+      font-poppins text-[15px] font-semibold tracking-wide
+      text-[#d4af37]
+      transition-all duration-300
+      hover:gap-3 hover:border-[#d4af37]
+    "
+  >
+    Conoce más
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M5 12h14M13 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </a>
+</div>
 
-                <a
-                  href={card.href}
-                  className="
-                    inline-flex items-center gap-2
-                    font-poppins text-[15px] font-semibold tracking-wide
-                    text-pink
-                    transition-all duration-300
-                    hover:gap-3 hover:text-pink/80
-                  "
-                >
-                  Conoce más
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M5 12h14M13 6l6 6-6 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
             </article>
           ))}
         </div>

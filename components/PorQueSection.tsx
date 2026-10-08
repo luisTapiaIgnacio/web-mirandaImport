@@ -1,90 +1,105 @@
-import Image from "next/image";
-
-const BENEFICIOS = [
-  { highlight: "Acompañamiento", texto: "cercano." },
-  { pre: "Proveedores ", highlight: "confiables y competitivos." },
-  { highlight: "Optimización", texto: "del presupuesto." },
-  { highlight: "Comunicación", texto: "constante." },
-  { pre: "Ejecución ", highlight: "profesional." },
+const RAZONES = [
+  "Acompañamiento cercano",
+  "Proveedores confiables",
+  "Optimización del presupuesto",
+  "Comunicación constante",
+  "Ejecución personal",
 ];
-
-function CheckIcon() {
-  return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0"
-    >
-      <circle cx="12" cy="12" r="10" stroke="#c04493" strokeWidth="1.8" />
-      <path
-        d="M7.5 12.5l3 3 6-6.5"
-        stroke="#c04493"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function PorQueSection() {
   return (
-    <section className="relative w-full overflow-hidden py-[100px]">
-      {/* 🎨 Fondo oscuro */}
-      <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/nova-btl/bg-black.jpg')" }}
-      />
-      <div className="absolute inset-0 -z-10 bg-black/60" />
+    <section className="relative overflow-hidden bg-black px-4 py-[100px] font-poppins text-white sm:px-6 lg:px-8">
+      {/* Animación flotante de los íconos */}
+      <style>{`
+        @keyframes flotar {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+      `}</style>
 
-      <div className="relative mx-auto max-w-[1290px] px-5">
-        {/* Encabezado: título izquierda + párrafo derecha */}
-        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-          <h2 className="
-            font-krona text-3xl uppercase leading-tight tracking-wide text-pink!
-            md:text-5xl
-            [text-shadow:0.5px_0_currentColor,-0.5px_0_currentColor]
-          ">
-            ¿Por qué contratar a Nova?
+      {/* Patrón de puntitos (muy suave) */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[length:24px_24px]" />
+
+      {/* Destellos de color bajos */}
+      <div className="pointer-events-none absolute -left-20 top-10 h-80 w-80 rounded-full bg-[#f5c542]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-[#0054ef]/15 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-[1290px]">
+        {/* Encabezado: título a la izquierda, texto a la derecha */}
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-12">
+          <h2 className="font-krona text-3xl uppercase leading-tight tracking-wide text-[#f5c542] md:max-w-[560px] md:text-4xl">
+            ¿Por qué contratar a Miranda Mirror?
           </h2>
 
-          <p className="font-poppins text-base leading-relaxed tracking-wide text-white/80 md:text-right md:text-lg">
-            Más que proveedores, somos un aliado estratégico que se involucra
-            en cada detalle para asegurar resultados alineados a tu negocio.
+          <p className="text-base leading-relaxed tracking-wide text-white/70 md:max-w-[440px] md:text-right">
+            <strong className="font-semibold text-white">
+              Más que proveedores
+            </strong>
+            , somos un aliado estratégico que se involucra en cada detalle para
+            asegurar resultados alineados a tu negocio, evento o plan.
           </p>
         </div>
 
-        {/* Lista de beneficios (centrada) */}
-        <ul className="mx-auto mt-16 max-w-xl list-none space-y-5 p-0 text-left">
-          {BENEFICIOS.map((b, i) => (
-            <li key={i} className="flex items-center gap-4">
-              <CheckIcon />
-              <span className="font-poppins text-base font-bold tracking-wide text-white md:text-lg">
-                {b.pre}
-                <span className="text-cyan-alt">{b.highlight}</span> {b.texto}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {/* Razones en zigzag (en desktop), unidas por líneas */}
+        <div className="mt-16 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:pb-4">
+          {RAZONES.map((razon, i) => {
+            const abajo = i % 2 === 0; // posiciones 1, 3 y 5 van abajo
+            const ultimo = i === RAZONES.length - 1;
 
-        {/* Botón */}
-        <div className="mt-14 text-center">
-          <a
-            href="/sobre-nosotros"
-            className="
-              inline-block rounded-xl
-              bg-pink px-10 py-3.5
-              font-poppins text-base font-semibold text-white
-              transition-all duration-300
-              hover:scale-105 hover:bg-pink/90
-              focus:outline-none focus:ring-2 focus:ring-pink/50 focus:ring-offset-2 focus:ring-offset-transparent
-            "
-          >
-            Ver más...
-          </a>
+            return (
+              <div
+                key={razon}
+                className={`group relative flex items-start gap-3 ${
+                  abajo ? "lg:mt-28" : ""
+                }`}
+              >
+                {/* Línea que conecta con la siguiente razón (solo desktop) */}
+                {!ultimo && (
+                  <span
+                    aria-hidden="true"
+                    className={`
+                      pointer-events-none absolute left-[22px] hidden h-[90px]
+                      w-[calc(100%+2px)] border-l border-white/30 lg:block
+                      ${
+                        abajo
+                          ? "bottom-full rounded-tl-xl border-t"
+                          : "top-11 rounded-bl-xl border-b"
+                      }
+                    `}
+                  />
+                )}
+
+                {/* Ícono flotante */}
+                <div
+                  className="
+                    relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full
+                    bg-gradient-to-br from-[#0054ef] to-[#09217d] text-base text-white
+                    shadow-lg shadow-[#0054ef]/30
+                    animate-[flotar_3s_ease-in-out_infinite]
+                  "
+                  style={{ animationDelay: `${i * 0.4}s` }}
+                >
+                  <i className="fa-solid fa-thumbs-up" aria-hidden="true" />
+                </div>
+
+                {/* Rectángulo transparente con hover */}
+                <h3
+                  className="
+                    relative flex-1 rounded-[28px] border border-white/25 bg-transparent
+                    px-4 py-3 text-sm font-bold uppercase leading-snug tracking-wide
+                    text-[#5b9bff]
+                    transition-all duration-300
+                    group-hover:border-[#f5c542] group-hover:bg-[#f5c542]/10
+                    group-hover:text-[#f5c542]
+                    group-hover:shadow-[0_0_24px_-6px_rgba(245,197,66,0.6)]
+                    lg:text-xs
+                  "
+                >
+                  {razon}
+                </h3>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

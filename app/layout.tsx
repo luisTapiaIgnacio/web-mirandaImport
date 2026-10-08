@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Krona_One } from "next/font/google";
-import "./globals.css";
+/*import "app/globals.css";*/
+import "@/app/globals.css"; 
 import BackToTop from "@/components/BackToTop";
 
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -38,6 +39,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es-PE" className={`${poppins.variable} ${kronaOne.variable}`}>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+      </head>
+
       <body>
         {children}
 
