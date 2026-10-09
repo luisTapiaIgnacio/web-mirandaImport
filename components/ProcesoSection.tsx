@@ -14,19 +14,11 @@ const BG_COLORS = [
   "bg-[#fff3cf] border border-[#f5c542]/40",
 ];
 
-
-
 export default function ProcesoSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#f2f5f7] to-[#fafbfc] py-[80px]">
-  {/* Patrón de puntitos (muy suave) */}
-  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(2,21,43,0.07)_1px,transparent_1px)] bg-[length:24px_24px]" />
-
-  {/* Destellos de color bajos */}
-  <div className="pointer-events-none absolute left-10 top-10 h-72 w-72 rounded-full bg-[#f5c542]/10 blur-3xl" />
-  <div className="pointer-events-none absolute bottom-10 right-10 h-80 w-80 rounded-full bg-[#0054ef]/10 blur-3xl" />
-
+    <section className="relative w-full py-[80px]">
   <div className="relative z-10 mx-auto max-w-[1400px] px-5">
+
         {/* Título */}
         <h2 className="text-center font-krona text-3xl uppercase leading-tight tracking-wide text-[#192a3d] md:text-4xl">
           ¿Cómo damos vida a tus ideas?
