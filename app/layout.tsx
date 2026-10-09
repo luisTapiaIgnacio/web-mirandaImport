@@ -3,6 +3,7 @@ import { Poppins, Krona_One } from "next/font/google";
 /*import "app/globals.css";*/
 import "@/app/globals.css"; 
 import BackToTop from "@/components/BackToTop";
+import AosInit from "@/components/AosInit";
 
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -47,6 +48,8 @@ export default function RootLayout({
       </head>
 
       <body>
+        <AosInit />
+
         {children}
 
         <BackToTop/>
