@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const WHATSAPP = "51913956853";
 const WHATSAPP_TEXTO = "+51 913 956 853";
 
@@ -35,41 +37,46 @@ export default function Footer() {
 
       <div className="relative z-10 mx-auto max-w-[1400px]">
         {/* Llamado principal */}
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-krona text-2xl uppercase leading-tight tracking-wide text-white! md:text-3xl">
-            ¡Haz que tus recuerdos sean{" "}
-            <span className="text-[#f5c542]">inolvidables</span>!
-          </h2>
+        <Reveal>
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-krona text-2xl uppercase leading-tight tracking-wide text-white! md:text-3xl">
+              ¡Haz que tus recuerdos sean{" "}
+              <span className="text-[#f5c542]">inolvidables</span>!
+            </h2>
 
-          <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
-            Sorprende a tus invitados con una experiencia fotográfica
-            diferente. Consulta nuestra disponibilidad y reserva tu fecha.
-          </p>
+            <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
+              Sorprende a tus invitados con una experiencia fotográfica
+              diferente. Consulta nuestra disponibilidad y reserva tu fecha.
+            </p>
 
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              mt-8 inline-flex items-center gap-3 rounded-full
-              bg-[#f5c542] px-8 py-4 font-semibold text-[#02152b]
-              shadow-lg shadow-[#f5c542]/20
-              transition-all duration-300
-              hover:scale-105 hover:bg-[#ffe9a8]
-            "
-          >
-            <i className="fa-brands fa-whatsapp text-2xl" aria-hidden="true" />
-            <span>Contáctanos por WhatsApp</span>
-          </a>
-        </div>
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                mt-8 inline-flex items-center gap-3 rounded-full
+                bg-[#f5c542] px-8 py-4 font-semibold text-[#02152b]
+                shadow-lg shadow-[#f5c542]/20
+                transition-all duration-300
+                hover:scale-105 hover:bg-[#ffe9a8]
+              "
+            >
+              <i
+                className="fa-brands fa-whatsapp text-2xl"
+                aria-hidden="true"
+              />
+              <span>Contáctanos por WhatsApp</span>
+            </a>
+          </div>
+        </Reveal>
 
         {/* Separador */}
         <hr className="my-12 border-t border-white/15" />
 
-        {/* Columnas */}
+        {/* Columnas (entran una tras otra) */}
         <div className="grid grid-cols-1 gap-10 text-left sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1.3fr_1fr]">
           {/* Sobre la empresa */}
-          <div>
+          <Reveal>
             <h3 className="mb-4 font-krona text-base uppercase tracking-wide text-[#f5c542]">
               Miranda Magic Mirror
             </h3>
@@ -83,10 +90,10 @@ export default function Footer() {
               Nos encargamos de preparar cada detalle para que tus invitados
               disfruten, interactúen y se lleven un recuerdo único de ese día.
             </p>
-          </div>
+          </Reveal>
 
           {/* Accesos rápidos */}
-          <div>
+          <Reveal delay={100}>
             <h3 className="mb-4 font-krona text-base uppercase tracking-wide text-white">
               Accesos rápidos
             </h3>
@@ -102,10 +109,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
 
           {/* Contacto */}
-          <div>
+          <Reveal delay={200}>
             <h3 className="mb-4 font-krona text-base uppercase tracking-wide text-white">
               Contáctanos
             </h3>
@@ -135,10 +142,10 @@ export default function Footer() {
                 coordinación
               </span>
             </p>
-          </div>
+          </Reveal>
 
           {/* Redes */}
-          <div>
+          <Reveal delay={300}>
             <h3 className="mb-4 font-krona text-base uppercase tracking-wide text-white">
               Síguenos
             </h3>
@@ -160,7 +167,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
 
         {/* Separador */}

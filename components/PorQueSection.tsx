@@ -1,3 +1,5 @@
+import Reveal from "@/components/Reveal";
+
 const RAZONES = [
   "Acompañamiento cercano",
   "Proveedores confiables",
@@ -26,19 +28,21 @@ export default function PorQueSection() {
 
       <div className="relative z-10 mx-auto max-w-[1290px]">
         {/* Encabezado: título a la izquierda, texto a la derecha */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-12">
-          <h2 className="font-krona text-3xl uppercase leading-tight tracking-wide text-[#f5c542] md:max-w-[560px] md:text-4xl">
-            ¿Por qué contratar a Miranda Mirror?
-          </h2>
+        <Reveal>
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-12">
+            <h2 className="font-krona text-3xl uppercase leading-tight tracking-wide text-[#f5c542] md:max-w-[560px] md:text-4xl">
+              ¿Por qué contratar a Miranda Mirror?
+            </h2>
 
-          <p className="text-base leading-relaxed tracking-wide text-white/70 md:max-w-[440px] md:text-right">
-            <strong className="font-semibold text-white">
-              Más que proveedores
-            </strong>
-            , somos un aliado estratégico que se involucra en cada detalle para
-            asegurar resultados alineados a tu negocio, evento o plan.
-          </p>
-        </div>
+            <p className="text-base leading-relaxed tracking-wide text-white/70 md:max-w-[440px] md:text-right">
+              <strong className="font-semibold text-white">
+                Más que proveedores
+              </strong>
+              , somos un aliado estratégico que se involucra en cada detalle
+              para asegurar resultados alineados a tu negocio, evento o plan.
+            </p>
+          </div>
+        </Reveal>
 
         {/* Razones en zigzag (en desktop), unidas por líneas */}
         <div className="mt-16 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-5 lg:pb-4">
@@ -47,57 +51,59 @@ export default function PorQueSection() {
             const ultimo = i === RAZONES.length - 1;
 
             return (
-              <div
+              // Cada razón entra una tras otra (el margen del zigzag va en el envoltorio)
+              <Reveal
                 key={razon}
-                className={`group relative flex items-start gap-3 ${
-                  abajo ? "lg:mt-28" : ""
-                }`}
+                delay={i * 150}
+                className={abajo ? "lg:mt-28" : ""}
               >
-                {/* Línea que conecta con la siguiente razón (solo desktop) */}
-                {!ultimo && (
-                  <span
-                    aria-hidden="true"
-                    className={`
-                      pointer-events-none absolute left-[22px] hidden h-[90px]
-                      w-[calc(100%+2px)] border-l border-white/30 lg:block
-                      ${
-                        abajo
-                          ? "bottom-full rounded-tl-xl border-t"
-                          : "top-11 rounded-bl-xl border-b"
-                      }
-                    `}
-                  />
-                )}
+                <div className="group relative flex items-start gap-3">
+                  {/* Línea que conecta con la siguiente razón (solo desktop) */}
+                  {!ultimo && (
+                    <span
+                      aria-hidden="true"
+                      className={`
+                        pointer-events-none absolute left-[22px] hidden h-[90px]
+                        w-[calc(100%+2px)] border-l border-white/30 lg:block
+                        ${
+                          abajo
+                            ? "bottom-full rounded-tl-xl border-t"
+                            : "top-11 rounded-bl-xl border-b"
+                        }
+                      `}
+                    />
+                  )}
 
-                {/* Ícono flotante */}
-                <div
-                  className="
-                    relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full
-                    bg-gradient-to-br from-[#0054ef] to-[#09217d] text-base text-white
-                    shadow-lg shadow-[#0054ef]/30
-                    animate-[flotar_3s_ease-in-out_infinite]
-                  "
-                  style={{ animationDelay: `${i * 0.4}s` }}
-                >
-                  <i className="fa-solid fa-thumbs-up" aria-hidden="true" />
+                  {/* Ícono flotante */}
+                  <div
+                    className="
+                      relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full
+                      bg-gradient-to-br from-[#0054ef] to-[#09217d] text-base text-white
+                      shadow-lg shadow-[#0054ef]/30
+                      animate-[flotar_3s_ease-in-out_infinite]
+                    "
+                    style={{ animationDelay: `${i * 0.4}s` }}
+                  >
+                    <i className="fa-solid fa-thumbs-up" aria-hidden="true" />
+                  </div>
+
+                  {/* Rectángulo transparente con hover */}
+                  <h3
+                    className="
+                      relative flex-1 rounded-[28px] border border-white/25 bg-transparent
+                      px-4 py-3 text-sm font-bold uppercase leading-snug tracking-wide
+                      text-[#5b9bff]
+                      transition-all duration-300
+                      group-hover:border-[#f5c542] group-hover:bg-[#f5c542]/10
+                      group-hover:text-[#f5c542]
+                      group-hover:shadow-[0_0_24px_-6px_rgba(245,197,66,0.6)]
+                      lg:text-xs
+                    "
+                  >
+                    {razon}
+                  </h3>
                 </div>
-
-                {/* Rectángulo transparente con hover */}
-                <h3
-                  className="
-                    relative flex-1 rounded-[28px] border border-white/25 bg-transparent
-                    px-4 py-3 text-sm font-bold uppercase leading-snug tracking-wide
-                    text-[#5b9bff]
-                    transition-all duration-300
-                    group-hover:border-[#f5c542] group-hover:bg-[#f5c542]/10
-                    group-hover:text-[#f5c542]
-                    group-hover:shadow-[0_0_24px_-6px_rgba(245,197,66,0.6)]
-                    lg:text-xs
-                  "
-                >
-                  {razon}
-                </h3>
-              </div>
+              </Reveal>
             );
           })}
         </div>

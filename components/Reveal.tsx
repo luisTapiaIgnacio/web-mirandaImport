@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -11,16 +10,26 @@ type Props = {
 
 export default function Reveal({ children, delay = 0, className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+
+  // "inicial" = visible sin animar (por si el JavaScript tarda o falla)
+  const [estado, setEstado] = useState<"inicial" | "oculto" | "visible">(
+    "inicial",
+  );
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Si ya está en pantalla al cargar, se deja visible tal cual
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+
+    // Si está más abajo, se oculta y se anima cuando entra en pantalla
+    setEstado("oculto");
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setEstado("visible");
           observer.disconnect();
         }
       },
@@ -34,10 +43,12 @@ export default function Reveal({ children, delay = 0, className = "" }: Props) {
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+      className={`${
+        estado === "oculto"
+          ? "translate-y-8 opacity-0 transition-none"
+          : "translate-y-0 opacity-100 transition-all duration-700 ease-out"
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: estado === "visible" ? `${delay}ms` : "0ms" }}
     >
       {children}
     </div>
