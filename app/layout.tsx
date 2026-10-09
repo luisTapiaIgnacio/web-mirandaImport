@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Poppins, Krona_One } from "next/font/google";
 /*import "app/globals.css";*/
-import "@/app/globals.css"; 
+import "@/app/globals.css";
 import BackToTop from "@/components/BackToTop";
-import AosInit from "@/components/AosInit";
+
 
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",  
+  variable: "--font-poppins",
 });
 
 const kronaOne = Krona_One({
@@ -48,11 +48,10 @@ export default function RootLayout({
       </head>
 
       <body>
-        <AosInit />
-
+       
         {children}
 
-        <BackToTop/>
+        <BackToTop />
         <WhatsAppButton />
       </body>
     </html>

@@ -14,7 +14,8 @@ export default function Hero() {
       <div
         className="animate-hero-zoom absolute inset-0 bg-cover bg-center will-change-transform"
         style={{
-          backgroundImage: "url('/images/nova-btl/imgi_46_Banner-principal-Nova-BTL.jpg')",
+          backgroundImage:
+            "url('/images/nova-btl/imgi_46_Banner-principal-Nova-BTL.jpg')",
         }}
       />
       {/* Oscurecedor */}
@@ -23,29 +24,37 @@ export default function Hero() {
       {/* Contenido */}
       <div className="animate-hero-reveal relative z-10 flex flex-1 flex-col items-center justify-center px-5 pt-24 pb-10">
         {/* 👇 Envuelvo TODO el contenido con la misma animación del fondo */}
-        <div className="animate-hero-zoom flex flex-col items-center will-change-transform" data-aos="fade-up">
+        <div className="animate-hero-zoom flex flex-col items-center will-change-transform">
           {/* H1 con sombra */}
-          <h1 className="
+          <h1
+            className="
             mb-4 text-[clamp(28px,4vw,40px)] leading-[1.4] font-bold uppercase
             text-light
             [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]
-          ">
-            &ldquo;TU EVENTO, TU ESTILO, <br/>  <span className="text-white">TUS RECUERDOS INOLVIDABLES</span>
-          
+          "
+          >
+            &ldquo;TU EVENTO, TU ESTILO, <br />{" "}
+            <span className="text-white">TUS RECUERDOS INOLVIDABLES</span>
           </h1>
 
           {/* Párrafo con sombra sutil */}
-          <p className="
+          <p
+            className="
   mx-auto mb-7 max-w-[620px] text-base text-white/80 md:text-lg
   [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]
-" data-aos="fade-up">
-  Transformamos cada celebración en una experiencia interactiva, divertida y llena de momentos especiales. Con nuestro{" "}
-  <span className="text-white font-black uppercase
-    [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]">
-    espejo fotográfico
-  </span>
-  , tus invitados serán protagonistas de recuerdos que podrán conservar para siempre
-</p>
+"
+          >
+            Transformamos cada celebración en una experiencia interactiva,
+            divertida y llena de momentos especiales. Con nuestro{" "}
+            <span
+              className="text-white font-black uppercase
+    [text-shadow:0_1px_8px_rgba(0,0,0,0.85)]"
+            >
+              espejo fotográfico
+            </span>
+            , tus invitados serán protagonistas de recuerdos que podrán
+            conservar para siempre
+          </p>
 
           {/* Botón */}
           <a
